@@ -9,6 +9,7 @@
 
 <body>
 
+<h1>Titre</h1>
 <form method="post" action="">
 			<fieldset>
 				<legend>Authentification</legend>
