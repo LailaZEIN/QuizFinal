@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.7.4
+- https://www.phpmyadmin.net
+-
+- Hôte : 127.0.0.1:3306
+- Généré le :  Dim 25 nov. 2018 à 10:06
+- Version du serveur :  5.7.19
+- Version de PHP :  5.6.31
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="quizfinal" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="question">
+                CREATE TABLE `question` (
+                  `numeroQuestion` int(11) NOT NULL AUTO_INCREMENT,
+                  `enonce` varchar(255) DEFAULT NULL,
+                  `estMultiple` bit(1) NOT NULL,
+                  `imageQuestion` varchar(255) DEFAULT NULL,
+                  `quiz_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`numeroQuestion`),
+                  KEY `FKr4j2orxaag8tafv7dnww8lrp0` (`quiz_id`),
+                  CONSTRAINT `FKr4j2orxaag8tafv7dnww8lrp0` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="question_reponse">
+                CREATE TABLE `question_reponse` (
+                  `Question_numeroQuestion` int(11) NOT NULL,
+                  `reponses_numeroReponse` int(11) NOT NULL,
+                  UNIQUE KEY `UK_cugnjogkf8so5gy2r9vnvn3sp` (`reponses_numeroReponse`),
+                  KEY `FK5vu0fo96slswyylfngb8766j0` (`Question_numeroQuestion`),
+                  CONSTRAINT `FK5vu0fo96slswyylfngb8766j0` FOREIGN KEY (`Question_numeroQuestion`) REFERENCES `question` (`numeroQuestion`),
+                  CONSTRAINT `FK6jrlq89qgkpqkae3i37epbfc6` FOREIGN KEY (`reponses_numeroReponse`) REFERENCES `reponse` (`numeroReponse`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="quiz">
+                CREATE TABLE `quiz` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `compteARebours` int(11) DEFAULT NULL,
+                  `nbQuestions` int(11) DEFAULT NULL,
+                  `score` int(11) DEFAULT NULL,
+                  `titreQuiz` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="quiz_question">
+                CREATE TABLE `quiz_question` (
+                  `Quiz_id` int(11) NOT NULL,
+                  `questions_numeroQuestion` int(11) NOT NULL,
+                  UNIQUE KEY `UK_opdthgu3jegtclmmgm0b4gh47` (`questions_numeroQuestion`),
+                  KEY `FK4dv986ko4hgpfg43qahdmwtbk` (`Quiz_id`),
+                  CONSTRAINT `FK4dv986ko4hgpfg43qahdmwtbk` FOREIGN KEY (`Quiz_id`) REFERENCES `quiz` (`id`),
+                  CONSTRAINT `FKbosh97dnua3ycs9g7bs4meb40` FOREIGN KEY (`questions_numeroQuestion`) REFERENCES `question` (`numeroQuestion`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="reponse">
+                CREATE TABLE `reponse` (
+                  `numeroReponse` int(11) NOT NULL AUTO_INCREMENT,
+                  `correct` bit(1) NOT NULL,
+                  `enonceReponse` varchar(255) DEFAULT NULL,
+                  `imageReponse` varchar(255) DEFAULT NULL,
+                  `question_numeroQuestion` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`numeroReponse`),
+                  KEY `FKnsvcver0300gk326mso4u4wos` (`question_numeroQuestion`),
+                  CONSTRAINT `FKnsvcver0300gk326mso4u4wos` FOREIGN KEY (`question_numeroQuestion`) REFERENCES `question` (`numeroQuestion`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="user">
+                CREATE TABLE `user` (
+                  `numeroUser` int(11) NOT NULL AUTO_INCREMENT,
+                  `email` varchar(255) DEFAULT NULL,
+                  `isAdmin` bit(1) DEFAULT NULL,
+                  `nom` varchar(255) DEFAULT NULL,
+                  `password` varchar(255) DEFAULT NULL,
+                  `prenom` varchar(255) DEFAULT NULL,
+                  `zip` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`numeroUser`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de données :  'quizfinal'
+    -->
+    <database name="quizfinal">
+        <!-- Table question -->
+        <table name="question">
+            <column name="numeroQuestion">1</column>
+            <column name="enonce">Quelle est la capitale de la Californie ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">californie</column>
+            <column name="quiz_id">1</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">2</column>
+            <column name="enonce">Quelle est la capitale de la Floride ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">floride</column>
+            <column name="quiz_id">1</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">3</column>
+            <column name="enonce">Quelle est la capitale du Texas ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">texas</column>
+            <column name="quiz_id">1</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">4</column>
+            <column name="enonce">Quel est le dernier État à avoir intégré les États-Unis ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">etat</column>
+            <column name="quiz_id">1</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">5</column>
+            <column name="enonce">Quelle est la capitale de l'Ohio ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">ohio</column>
+            <column name="quiz_id">1</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">6</column>
+            <column name="enonce">Quelle est la capitale du Maroc ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">maroc</column>
+            <column name="quiz_id">2</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">7</column>
+            <column name="enonce">Quelle est la capitale de l'Australie ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">australie</column>
+            <column name="quiz_id">2</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">8</column>
+            <column name="enonce">Quelle est la capitale du Brésil ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">bresil</column>
+            <column name="quiz_id">2</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">9</column>
+            <column name="enonce">Quelle est la capitale du Canada ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">canada</column>
+            <column name="quiz_id">2</column>
+        </table>
+        <table name="question">
+            <column name="numeroQuestion">10</column>
+            <column name="enonce">Quelle est la capitale du Japon ?</column>
+            <column name="estMultiple">0</column>
+            <column name="imageQuestion">japon</column>
+            <column name="quiz_id">2</column>
+        </table>
+        <!-- Table question_reponse -->
+        <!-- Table quiz -->
+        <table name="quiz">
+            <column name="id">1</column>
+            <column name="compteARebours">0</column>
+            <column name="nbQuestions">5</column>
+            <column name="score">0</column>
+            <column name="titreQuiz">Géographie - États-Unis</column>
+        </table>
+        <table name="quiz">
+            <column name="id">2</column>
+            <column name="compteARebours">0</column>
+            <column name="nbQuestions">5</column>
+            <column name="score">0</column>
+            <column name="titreQuiz">Géographie - capitales</column>
+        </table>
+        <!-- Table quiz_question -->
+        <!-- Table reponse -->
+        <table name="reponse">
+            <column name="numeroReponse">1</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Los Angeles</column>
+            <column name="imageReponse">la</column>
+            <column name="question_numeroQuestion">1</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">2</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">San Francisco</column>
+            <column name="imageReponse">sf</column>
+            <column name="question_numeroQuestion">1</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">3</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">San Diego</column>
+            <column name="imageReponse">sd</column>
+            <column name="question_numeroQuestion">1</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">4</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Sacramento</column>
+            <column name="imageReponse">sacramento</column>
+            <column name="question_numeroQuestion">1</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">5</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Miami</column>
+            <column name="imageReponse">miami</column>
+            <column name="question_numeroQuestion">2</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">6</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Tallahassee</column>
+            <column name="imageReponse">tallahassee</column>
+            <column name="question_numeroQuestion">2</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">7</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Tampa Bay</column>
+            <column name="imageReponse">tampa</column>
+            <column name="question_numeroQuestion">2</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">8</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Orlando</column>
+            <column name="imageReponse">orlando</column>
+            <column name="question_numeroQuestion">2</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">9</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Dallas</column>
+            <column name="imageReponse">dallas</column>
+            <column name="question_numeroQuestion">3</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">10</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Austin</column>
+            <column name="imageReponse">austin</column>
+            <column name="question_numeroQuestion">3</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">11</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Houston</column>
+            <column name="imageReponse">houston</column>
+            <column name="question_numeroQuestion">3</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">12</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Galveston</column>
+            <column name="imageReponse">galveston</column>
+            <column name="question_numeroQuestion">3</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">13</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Alaska</column>
+            <column name="imageReponse">alaska</column>
+            <column name="question_numeroQuestion">4</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">14</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Nouveau-Mexique</column>
+            <column name="imageReponse">newmexico</column>
+            <column name="question_numeroQuestion">4</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">15</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Hawaï</column>
+            <column name="imageReponse">hawai</column>
+            <column name="question_numeroQuestion">4</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">16</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Oregon</column>
+            <column name="imageReponse">oregon</column>
+            <column name="question_numeroQuestion">4</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">17</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Columbus</column>
+            <column name="imageReponse">columbus</column>
+            <column name="question_numeroQuestion">5</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">18</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Cleveland</column>
+            <column name="imageReponse">Cleveland</column>
+            <column name="question_numeroQuestion">5</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">19</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Cincinnati</column>
+            <column name="imageReponse">Cincinnati</column>
+            <column name="question_numeroQuestion">5</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">20</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Dayton</column>
+            <column name="imageReponse">dayton</column>
+            <column name="question_numeroQuestion">5</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">21</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Rabat</column>
+            <column name="imageReponse">rabat</column>
+            <column name="question_numeroQuestion">6</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">22</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Sydney</column>
+            <column name="imageReponse">sydney</column>
+            <column name="question_numeroQuestion">7</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">23</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Melbourne</column>
+            <column name="imageReponse">melbourne</column>
+            <column name="question_numeroQuestion">7</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">24</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Perth</column>
+            <column name="imageReponse">perth</column>
+            <column name="question_numeroQuestion">7</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">25</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Canberra</column>
+            <column name="imageReponse">canberra</column>
+            <column name="question_numeroQuestion">7</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">26</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">São Paulo</column>
+            <column name="imageReponse">sp</column>
+            <column name="question_numeroQuestion">8</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">27</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Rio de Janeiro</column>
+            <column name="imageReponse">rio</column>
+            <column name="question_numeroQuestion">8</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">28</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Salvador da Bahia</column>
+            <column name="imageReponse">salvador</column>
+            <column name="question_numeroQuestion">8</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">29</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Brasilia</column>
+            <column name="imageReponse">brasilia</column>
+            <column name="question_numeroQuestion">8</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">30</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Toronto</column>
+            <column name="imageReponse">toronto</column>
+            <column name="question_numeroQuestion">9</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">31</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Montréal</column>
+            <column name="imageReponse">montreal</column>
+            <column name="question_numeroQuestion">9</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">32</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Ottawa</column>
+            <column name="imageReponse">ottawa</column>
+            <column name="question_numeroQuestion">1</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">33</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Vancouver</column>
+            <column name="imageReponse">vancouver</column>
+            <column name="question_numeroQuestion">1</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">34</column>
+            <column name="correct">1</column>
+            <column name="enonceReponse">Tokyo</column>
+            <column name="imageReponse">tokyo</column>
+            <column name="question_numeroQuestion">10</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">35</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Kyoto</column>
+            <column name="imageReponse">kyoto</column>
+            <column name="question_numeroQuestion">10</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">36</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Kobe</column>
+            <column name="imageReponse">kobe</column>
+            <column name="question_numeroQuestion">10</column>
+        </table>
+        <table name="reponse">
+            <column name="numeroReponse">37</column>
+            <column name="correct">0</column>
+            <column name="enonceReponse">Osaka</column>
+            <column name="imageReponse">osaka</column>
+            <column name="question_numeroQuestion">10</column>
+        </table>
+        <!-- Table user -->
+        <table name="user">
+            <column name="numeroUser">1</column>
+            <column name="email">moidor44@hotmail.com</column>
+            <column name="isAdmin">1</column>
+            <column name="nom">Zein</column>
+            <column name="password">toto</column>
+            <column name="prenom">Cham</column>
+            <column name="zip">44200</column>
+        </table>
+        <table name="user">
+            <column name="numeroUser">2</column>
+            <column name="email">ismool44@hotmail.com</column>
+            <column name="isAdmin">0</column>
+            <column name="nom">Zein</column>
+            <column name="password">titi</column>
+            <column name="prenom">Ismaël</column>
+            <column name="zip">44200</column>
+        </table>
+    </database>
+</pma_xml_export>
